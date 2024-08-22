@@ -8,6 +8,7 @@ import DrizzleIcon from "../assets/drizzle.png";
 import RainIcon from "../assets/rain.png";
 import SnowIcon from "../assets/snow.png";
 import HumidityIcon from "../assets/humidity.png";
+import FogIcon from "../assets/fog.png";
 
 const Weather = () => {
   // State variables for managing city input, loading state, weather data, and error messages
@@ -15,23 +16,6 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
-
-  const weatherIconMap = {
-    "Clear sky": ClearIcon,
-    "Few clouds": CloudIcon,
-    "Scattered clouds": CloudIcon,
-    "Broken clouds": CloudIcon,
-    "Overcast clouds": CloudIcon,
-    "Light rain": DrizzleIcon,
-    "Moderate rain": RainIcon,
-    "Heavy rain": RainIcon,
-    "Light snow": SnowIcon,
-    Snow: SnowIcon,
-    "Heavy snow": SnowIcon,
-    "Shower rain": RainIcon,
-    Thunderstorm: RainIcon,
-    Mist: CloudIcon,
-  };
 
   // Function to fetch weather data from Weatherbit API
   const search = async (city) => {
@@ -89,8 +73,33 @@ const Weather = () => {
     }
   };
 
-  const getWeatherIcon = (code) => {
-    return weatherIconMap[code] || ClearIcon; // Default to ClearIcon if no match
+  // const getWeatherIcon = (code) => {
+  //   return weatherIconMap[code] || ClearIcon; // Default to ClearIcon if no match
+  // };
+  const getWeatherIcon = (description) => {
+    switch (description.toLowerCase()) {
+      case "clear sky":
+        return ClearIcon;
+      case "few clouds":
+      case "scattered clouds":
+      case "broken clouds":
+      case "overcast clouds":
+        return CloudIcon;
+      case "shower rain":
+      case "rain":
+      case "moderate rain":
+      case "light rain":
+        return RainIcon;
+      case "thunderstorm":
+        return RainIcon;
+      case "snow":
+        return SnowIcon;
+      case "mist":
+      case "fog":
+        return FogIcon;
+      default:
+        return ClearIcon;
+    }
   };
 
   return (
