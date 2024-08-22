@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Weather.css";
-import SerachIcon from "../assets/search.png";
+import SearchIcon from "../assets/search.png";
 import ClearIcon from "../assets/clear.png";
 import CloudIcon from "../assets/cloud.png";
 import WindIcon from "../assets/wind.png";
@@ -15,6 +15,23 @@ const Weather = () => {
   const [loading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null);
+
+  const weatherIconMap = {
+    "Clear sky": ClearIcon,
+    "Few clouds": CloudIcon,
+    "Scattered clouds": CloudIcon,
+    "Broken clouds": CloudIcon,
+    "Overcast clouds": CloudIcon,
+    "Light rain": DrizzleIcon,
+    "Moderate rain": RainIcon,
+    "Heavy rain": RainIcon,
+    "Light snow": SnowIcon,
+    Snow: SnowIcon,
+    "Heavy snow": SnowIcon,
+    "Shower rain": RainIcon,
+    Thunderstorm: RainIcon,
+    Mist: CloudIcon,
+  };
 
   // Function to fetch weather data from Weatherbit API
   const search = async (city) => {
@@ -60,14 +77,20 @@ const Weather = () => {
 
   // Function to handle search button click
   const handleSearchClick = () => {
-    search(city); // Trigger the search function with the current city input
+    search(city);
+    setCity(""); // Clear the input after search
   };
 
   // Event handler for Enter key press
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       search(city);
+      setCity(""); // Clear the input after search
     }
+  };
+
+  const getWeatherIcon = (code) => {
+    return weatherIconMap[code] || ClearIcon; // Default to ClearIcon if no match
   };
 
   return (
@@ -82,7 +105,7 @@ const Weather = () => {
           onKeyPress={handleKeyPress} // Listen for Enter key press
         />
         <img
-          src={SerachIcon}
+          src={SearchIcon}
           alt="Search icon"
           onClick={handleSearchClick}
           style={{ cursor: city.trim() ? "pointer" : "not-allowed" }}
@@ -94,7 +117,11 @@ const Weather = () => {
       {error && <p>{error}</p>} {/* Show error message if an error occurred */}
       {weatherData /* Show weather data if available */ && (
         <>
-          <img src={ClearIcon} alt="" className="weather-icons" />
+          <img
+            src={getWeatherIcon(weatherData.weather.description)}
+            alt="weatherData.weather.description"
+            className="weather-icons"
+          />
           <p className="temperature">{weatherData.temp}°C</p>
           <p className="location">{weatherData.city_name}</p>
           <div className="weather-data">
