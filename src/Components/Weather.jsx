@@ -63,6 +63,13 @@ const Weather = () => {
     search(city); // Trigger the search function with the current city input
   };
 
+  // Event handler for Enter key press
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      search(city);
+    }
+  };
+
   return (
     <div className="Weather">
       {/* Search Bar */}
@@ -72,6 +79,7 @@ const Weather = () => {
           placeholder="Search"
           value={city}
           onChange={(e) => setCity(e.target.value)}
+          onKeyPress={handleKeyPress} // Listen for Enter key press
         />
         <img
           src={SerachIcon}
