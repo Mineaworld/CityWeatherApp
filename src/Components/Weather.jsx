@@ -45,6 +45,7 @@ const Weather = () => {
       if (data.count === 0) {
         throw new Error("No data found for the specified city");
       }
+      setWeatherData(data.data[0]);
 
       setWeatherData(data.data[0]); // Set weather data to state
     } catch (error) {
@@ -102,8 +103,51 @@ const Weather = () => {
     }
   };
 
+  // Function to get the background class based on weather description
+  const getBackgroundStyle = (description) => {
+    switch (description.toLowerCase()) {
+      case "clear sky":
+        return {
+          backgroundImage: "linear-gradient(135deg, #FFD700, #FFA500)",
+        };
+      case "few clouds":
+      case "scattered clouds":
+      case "broken clouds":
+      case "overcast clouds":
+        return {
+          backgroundImage: "linear-gradient(135deg, #6a2589, #0f57de)",
+        };
+      case "shower rain":
+      case "rain":
+      case "moderate rain":
+      case "light rain":
+      case "thunderstorm":
+        return {
+          backgroundImage: "linear-gradient(135deg, #3a7bd5, #00d2ff)",
+        };
+      case "snow":
+        return {
+          backgroundImage: "linear-gradient(135deg, #83a4d4, #b6fbff)",
+        };
+      case "mist":
+      case "fog":
+        return {
+          backgroundImage: "linear-gradient(135deg, #3e5151, #decba4)",
+        };
+      default:
+        return {
+          backgroundImage: "linear-gradient(135deg, #6a2589, #0f57de)",
+        };
+    }
+  };
+
   return (
-    <div className="Weather">
+    <div
+      className="Weather"
+      style={
+        weatherData ? getBackgroundStyle(weatherData.weather.description) : {}
+      }
+    >
       {/* Search Bar */}
       <div className="search-bar">
         <input
