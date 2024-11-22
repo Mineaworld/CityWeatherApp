@@ -4,7 +4,6 @@ import SearchIcon from "../assets/search.png";
 import ClearIcon from "../assets/clear.png";
 import CloudIcon from "../assets/cloud.png";
 import WindIcon from "../assets/wind.png";
-import DrizzleIcon from "../assets/drizzle.png";
 import RainIcon from "../assets/rain.png";
 import SnowIcon from "../assets/snow.png";
 import HumidityIcon from "../assets/humidity.png";
@@ -74,9 +73,6 @@ const Weather = () => {
     }
   };
 
-  // const getWeatherIcon = (code) => {
-  //   return weatherIconMap[code] || ClearIcon; // Default to ClearIcon if no match
-  // };
   const getWeatherIcon = (description) => {
     switch (description.toLowerCase()) {
       case "clear sky":
@@ -166,7 +162,7 @@ const Weather = () => {
       </div>
       {/* Conditional Rendering */}
       {loading && <p>Loading...</p>}{" "}
-      {/* Show loading message if data is being fetched */}
+      {/* Show loading message data is being fetched */}
       {error && <p>{error}</p>} {/* Show error message if an error occurred */}
       {weatherData /* Show weather data if available */ && (
         <>
