@@ -1,4 +1,4 @@
-# CityWeatherApp
+g# CityWeatherApp
 
 CityWeatherApp is a modern React-based web application that enables users to search for any city and view real-time weather conditions, including temperature, humidity, and wind speed. This application leverages the Weatherbit API to fetch accurate and up-to-date weather data.
 
@@ -19,7 +19,7 @@ CityWeatherApp is a modern React-based web application that enables users to sea
     npm install
 3. Create a .env file in the root directory and add your API key:
     ```bash
-    VITE_API_KEY=your_api_key_here
+    WEATHERBIT_API_KEY = "your_api_key_here"
 4. Start the application:
    ```bash
    npm run dev
