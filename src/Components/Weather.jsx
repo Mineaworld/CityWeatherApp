@@ -29,7 +29,7 @@ const Weather = () => {
 
     try {
       const url = `https://api.weatherbit.io/v2.0/current?city=${city}&key=${
-        import.meta.env.VITE_WEATHERBIT_API_KEY
+        import.meta.env.WEATHERBIT_API_KEY
       }`;
       const response = await fetch(url);
 
