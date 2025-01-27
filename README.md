@@ -1,4 +1,4 @@
-g# CityWeatherApp
+CityWeatherApp
 
 CityWeatherApp is a modern React-based web application that enables users to search for any city and view real-time weather conditions, including temperature, humidity, and wind speed. This application leverages the Weatherbit API to fetch accurate and up-to-date weather data.
 
